@@ -10,3 +10,12 @@ services:
       - "8000:8000"
     environment:
       - LOCAL=1
+    depends_on:
+      - migration
+  migration:
+    build: .
+    command: python vulnerable_website/manage.py migrate
+    volumes:
+      - .:/code
+    environment:
+      - LOCAL=1
