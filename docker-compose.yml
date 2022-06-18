@@ -14,7 +14,7 @@ services:
       - migration_vulnerable_website
   migration_vulnerable_website:
     build: ./vulnerable_website
-    command: python vulnerable_website/manage.py migrate && python vulnerable-website/manage.py collectstatic
+    command: python vulnerable_website/manage.py migrate
     volumes:
       - .:/code
     environment:
