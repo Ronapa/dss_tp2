@@ -1,21 +1,34 @@
 version: "3.9"
    
 services:
-  web:
-    build: .
-    command: python vulnerable_website/manage.py runserver 0.0.0.0:8000
+  vulnerable_website:
+    build: ./vulnerable_website
+    command: python vulnerable_website/manage.py runserver 0.0.0.0:1234
     volumes:
       - .:/code
     ports:
-      - "8000:8000"
+      - "1234:1234"
     environment:
       - LOCAL=1
     depends_on:
-      - migration
-  migration:
-    build: .
-    command: python vulnerable_website/manage.py migrate
+      - migration_vulnerable_website
+  migration_vulnerable_website:
+    build: ./vulnerable_website
+    command: python vulnerable_website/manage.py migrate && python vulnerable-website/manage.py collectstatic
     volumes:
       - .:/code
     environment:
       - LOCAL=1
+  malicious_website:
+    build: ./malicious_website
+    command: python malicious_website/manage.py runserver 0.0.0.0:5678
+    volumes:
+      - .:/code
+    ports:
+      - "5678:5678"
+    environment:
+      - LOCAL=1
+  reverse_proxy:
+    build: ./reverse_proxy
+    ports:
+      - "80:80"

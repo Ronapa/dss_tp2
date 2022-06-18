@@ -1,4 +1,4 @@
-"""vulnerable_website URL Configuration
+"""malicious_website URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -16,11 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include # new
 from django.views.generic.base import TemplateView
-from .views import SensitiveData
+from .views import CapturedData
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),  # new
     path("", TemplateView.as_view(template_name="home.html"), name="home"),
-    path("sensitive-victim-data", SensitiveData.as_view(), name="sensitive-victim-data"),
+    path("log", TemplateView.as_view(template_name="captured.html"), name="captured"),
 ]

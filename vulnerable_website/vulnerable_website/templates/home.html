@@ -4,10 +4,16 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-  Hi {{ user.username }}!
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
+<div class="form">
+  <div class="title">Bienvenido {{ user.username }}!</div>
+  <button type="button" class="submit" onclick="location.href='{% url 'sensitive-victim-data' %}'">Ver datos sensibles</button>
+  <button type="button" class="submit" onclick="location.href='{% url 'logout' %}'">Cerrar sesión</button>
+</div>
 {% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a>
+<div class="form">
+  <div class="title">Bienvenido</div>
+  <div class="subtitle">No estás loggueado</div>
+  <button type="button" class="submit" onclick="location.href='{% url 'login' %}'">Log in</button>
+</div>
 {% endif %}
 {% endblock %}
